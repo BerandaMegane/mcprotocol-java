@@ -1,9 +1,9 @@
-package mc3eprotocol.frame;
+package mc3eprotocol;
 
 import org.junit.jupiter.api.Test;
 
-import mc3eprotocol.*;
 import mc3eprotocol.define.*;
+import mc3eprotocol.frame.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 

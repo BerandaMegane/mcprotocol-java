@@ -118,4 +118,8 @@ public class UtilityTest {
         byte[] result = Utility.fromIntToBytes(value, length);
         assertArrayEquals(expected, result);
     }
+
+    public static void main(String[] args) {
+        System.out.println("UtilityTest");
+    }
 }

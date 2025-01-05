@@ -2,7 +2,7 @@ package mc3eprotocol;
 
 import org.junit.jupiter.api.Test;
 
-import mc3eprotocol.define.*;
+import mc3eprotocol.define.DeviceCodeEnum;
 
 import static org.junit.jupiter.api.Assertions.*;
 
