@@ -1,4 +1,4 @@
-package mc3eprotocol.frame;
+package mc3eprotocol;
 
 import java.nio.*;
 
@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import mc3eprotocol.define.*;
+import mc3eprotocol.frame.*;
 
 public class ParserTest {
 

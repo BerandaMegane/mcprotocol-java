@@ -1,4 +1,4 @@
-import mc3eprotocol.*;
+package mc3eprotocol;
 import mc3eprotocol.define.*;
 
 public class ClientSample {

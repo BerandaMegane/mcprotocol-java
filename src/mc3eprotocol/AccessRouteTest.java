@@ -1,5 +1,4 @@
 package mc3eprotocol;
-
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -50,5 +49,9 @@ public class AccessRouteTest {
         assertArrayEquals(new byte[]{(byte)0xFF}, route.getPlcStationNumberBytes());
         assertArrayEquals(new byte[]{(byte)0xFF, 0x03}, route.getUnitIoNumberBytes());
         assertArrayEquals(new byte[]{(byte)0x00}, route.getUnitStationNumberBytes());
+    }
+
+    public static void main(String[] args) {
+        System.out.println("AccessRouteTest");
     }
 }
