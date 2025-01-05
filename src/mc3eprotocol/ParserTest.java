@@ -27,7 +27,7 @@ public class ParserTest {
         };
 
         Frame3E frame = Parser.parseFrame(bytes);
-        Parser.printInfo(frame.toBytes());
+        Parser.printFrameInfo(frame.toBytes());
 
         assertEquals(SubHeaderEnum.RESPONSE, frame._subHeader);
         assertNotNull(frame._accessRoute);
@@ -71,7 +71,7 @@ public class ParserTest {
             0x01, 0x02 
         };
 
-        Parser.printInfo(bytes);
+        Parser.printFrameInfo(bytes);
     }
 
     public static void main(String[] args) {

@@ -1,5 +1,6 @@
 package mc3eprotocol.payload;
 
+import mc3eprotocol.Utility;
 import mc3eprotocol.define.*;
 
 public abstract class AbstractRequest implements IPayload {
@@ -34,4 +35,18 @@ public abstract class AbstractRequest implements IPayload {
      * @param request
      */
     public abstract void parse(byte[] request);
+
+    /**
+     * リクエストの情報を表示する
+     */
+    public void printInfo() {
+        System.out.println(Utility.hereDoc(s->s, System.lineSeparator(), 
+        //   Request payload: 00019000000100000401
+            "Request payload: " + Utility.fromBytesToHexStringBigEndian(toBytes()),
+            "                 1   2   3",
+            "                 1: コマンド: " + _command.toString(),
+            "                 2: サブコマンド: " + _subCommand.toString(),
+            "                 3: その他のデータ"
+        ));
+    }
 }

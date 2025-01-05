@@ -53,8 +53,7 @@ public class BlockReadRequest extends AbstractRequest {
     @Override
     public AbstractResponse parseResponse(byte[] response) {
         if (_isBitDevice) {
-            throw new UnsupportedOperationException("Unimplemented method 'parseResponse'");
-            // return new BlockBitReadResponse(response);
+            return new BlockBitReadResponse(response, this);
         } else {
             return new BlockWordReadResponse(response, this);
         }
@@ -105,5 +104,22 @@ public class BlockReadRequest extends AbstractRequest {
         data = new byte[2];
         buffer.get(data);
         _devicePoint = (short)Utility.fromBytesToInt(data);
+    }
+
+    /**
+     * リクエストの情報を表示する
+     */
+    @Override
+    public void printInfo() {
+        System.out.println(Utility.hereDoc(s->s, System.lineSeparator(), 
+        //   Request payload: 00019000000100000401
+            "Request payload: " + Utility.fromBytesToHexStringBigEndian(toBytes()),
+            "                 1   2   3     4 5",
+            "                 1: コマンド: " + _command.toString(),
+            "                 2: サブコマンド: " + _subCommand.toString(),
+            "                 3: デバイス番号",
+            "                 4: デバイスコード",
+            "                 5: デバイス点数"
+        ));
     }
 }

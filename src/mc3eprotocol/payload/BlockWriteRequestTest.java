@@ -34,7 +34,7 @@ public class BlockWriteRequestTest {
         boolean isBitDevice = false;
         byte[] writeBytes = new byte[] {0x01, 0x02, 0x03, 0x04};
 
-        BlockWriteRequest blockWriteRequest = new BlockWriteRequest(seriesModel, deviceSpec, writeBytes, isBitDevice);
+        BlockWriteRequest blockWriteRequest = new BlockWriteRequest(seriesModel, deviceSpec, (short)2, writeBytes, isBitDevice);
 
         assertNotNull(blockWriteRequest);
         assertEquals(seriesModel, blockWriteRequest._seriesModel);
@@ -53,7 +53,7 @@ public class BlockWriteRequestTest {
         boolean isBitDevice = false;
         byte[] writeBytes = new byte[] {0x01, 0x02};
 
-        BlockWriteRequest blockWriteRequest = new BlockWriteRequest(seriesModel, deviceSpec, writeBytes, isBitDevice);
+        BlockWriteRequest blockWriteRequest = new BlockWriteRequest(seriesModel, deviceSpec, (short)2, writeBytes, isBitDevice);
         byte[] bytes = blockWriteRequest.toBytes();
 
         assertNotNull(bytes);

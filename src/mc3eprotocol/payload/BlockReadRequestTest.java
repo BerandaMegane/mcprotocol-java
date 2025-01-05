@@ -58,20 +58,4 @@ public class BlockReadRequestTest {
             }, bytes
         );
     }
-
-
-    @Test
-    public void testParseResponseUnsupportedOperationException() {
-        SeriesModelEnum seriesModel = SeriesModelEnum.Q_SERIES;
-        DeviceSpec deviceSpec = new DeviceSpec("M200");
-        short devicePoint = 1;
-        boolean isBitDevice = true;
-
-        BlockReadRequest request = new BlockReadRequest(seriesModel, deviceSpec, devicePoint, isBitDevice);
-        byte[] responseBytes = new byte[]{0x00, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04};
-
-        assertThrows(UnsupportedOperationException.class, () -> {
-            request.parseResponse(responseBytes);
-        });
-    }
 }

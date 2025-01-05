@@ -32,21 +32,17 @@ public class BlockWriteRequest extends AbstractRequest {
      * @param writeBytes
      * @param isBitDevice
      */
-    public BlockWriteRequest(SeriesModelEnum seriesModel, DeviceSpec deviceSpec, byte[] writeBytes, boolean isBitDevice) {
-
+    public BlockWriteRequest(SeriesModelEnum seriesModel, DeviceSpec deviceSpec, short devicePoint, byte[] writeBytes, boolean isBitDevice) {
         this._seriesModel = seriesModel;
         this._deviceSpec = deviceSpec;
+        this._devicePoint = devicePoint;
         this._writeBytes = writeBytes;
         this._isBitDevice = isBitDevice;
-        
+
         this._command = CommandEnum.BLOCK_WRITE;
-        short devicePoint = (short)(writeBytes.length);
         if (_isBitDevice) {
-            this._devicePoint = devicePoint;
             _subCommand = SubCommandEnum.Q_BIT;
-            throw new UnsupportedOperationException("Not supported yet.");
         } else {
-            this._devicePoint = (short)(devicePoint / 2);
             _subCommand = SubCommandEnum.Q_WORD;
         }
     }
@@ -59,12 +55,7 @@ public class BlockWriteRequest extends AbstractRequest {
      */
     @Override
     public AbstractResponse parseResponse(byte[] responseData) {
-        if (_isBitDevice) {
-            throw new UnsupportedOperationException("Not supported yet.");
-            // return new BlockBitReadResponse(response);
-        } else {
-            return new NoneResponse(responseData);
-        }
+        return new NoneResponse(responseData);
     }
 
     /**
@@ -111,11 +102,28 @@ public class BlockWriteRequest extends AbstractRequest {
 
         // ポイント数
         data = new byte[2];
-        buffer.get(data);
-        _devicePoint = (short)Utility.fromBytesToInt(data);
+        _devicePoint = buffer.getShort();
 
         // データ
         _writeBytes = new byte[buffer.remaining()];
         buffer.get(_writeBytes);
+    }
+
+    /**
+     * リクエストの情報を表示する
+     */
+    @Override
+    public void printInfo() {
+        System.out.println(Utility.hereDoc(s->s, System.lineSeparator(), 
+        //   Request payload: 00019000000100000401
+            "Request payload: " + Utility.fromBytesToHexStringBigEndian(toBytes()),
+            "                 1   2   3     4 5 6",
+            "                 1: コマンド: " + _command.toString(),
+            "                 2: サブコマンド: " + _subCommand.toString(),
+            "                 3: デバイス番号",
+            "                 4: デバイスコード",
+            "                 5: デバイス点数",
+            "                 6: 書込むデータ"
+        ));
     }
 }

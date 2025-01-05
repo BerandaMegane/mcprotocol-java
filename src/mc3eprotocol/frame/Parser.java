@@ -61,8 +61,17 @@ public class Parser {
         return data;
     }
 
-    public static void printInfo(byte[] bytes) {
+    public static void printFrameInfo(byte[] bytes) {
         Frame3E frame = parseFrame(bytes);
+
+        String monitorOrFinish;
+        if (frame._subHeader == SubHeaderEnum.REQUEST) {
+            monitorOrFinish = "監視タイマ: " + Utility.fromBytesToHexString(Utility.fromIntToBytes(frame._monitorOrFinishCode, 2));
+        } else if (frame._subHeader == SubHeaderEnum.RESPONSE) {
+            monitorOrFinish = "終了コード: " + Utility.fromBytesToHexString(Utility.fromIntToBytes(frame._monitorOrFinishCode, 2));
+        } else {
+            monitorOrFinish = "監視タイマ/終了コード: " + Utility.fromBytesToHexString(Utility.fromIntToBytes(frame._monitorOrFinishCode, 2));
+        }
 
         System.out.println(
             Utility.hereDoc(s->s, System.lineSeparator(), 
@@ -73,7 +82,7 @@ public class Parser {
                 "       1: サブヘッダ: " + frame._subHeader,
                 "       2: アクセス経路",
                 "       3: データ長 (4以降のバイト数）: " + frame._uncheckedDataLength + "",
-                "       4: 監視タイマ/終了コード: " + Utility.fromBytesToHexString(Utility.fromIntToBytes(frame._monitorOrFinishCode, 2)),
+                "       4: " + monitorOrFinish,
                 "       5: その他のデータ" 
             )
         );
