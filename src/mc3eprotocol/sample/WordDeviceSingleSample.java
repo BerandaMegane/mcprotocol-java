@@ -2,10 +2,10 @@ package mc3eprotocol.sample;
 
 import mc3eprotocol.lib.Client;
 
-public class ClientSample {
+public class WordDeviceSingleSample {
     public static void main(String[] args) {
         boolean debug = true;
-        Client client = new Client("172.16.12.150", 1025, debug);
+        Client client = new Client("172.16.212.172", 1025, debug);
         client.connect();
         if (client.isConnected()) {
             System.out.println("接続できました");
@@ -14,7 +14,13 @@ public class ClientSample {
             return;
         } 
         
-        // ここに書く
+        System.out.println("D200 に 512 を書き込んで読み込む");
+        client.setDevice2("D200", (short)512);
+        client.printDevice2("D200");
+
+        System.out.println("D200 に 256 を書き込んで読み込む");
+        client.setDevice2("D200", (short)256);
+        client.printDevice2("D200");
         
         client.disconnect();
     }
