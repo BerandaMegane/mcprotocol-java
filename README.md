@@ -46,7 +46,7 @@ git がなくても、このリポジトリを ZIP ファイルでダウンロ�
 
 ```powershell
 # GitHub からダウンロード
-> git clone https://github.com/BerandaMegane/mcprotocol-java.git
+> git clone https://github.com/work-motonaga/mcprotocol-java.git
 # ディレクトリ移動
 > cd mcprotocol-java
 ```
